@@ -1,3 +1,6 @@
+print("HELLO WORLD!!!!")
+print(renv::status())
+
 library(shiny)
 library(digest)
 

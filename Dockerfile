@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:latest
 
-FROM rocker/shiny:4.2.0
+FROM rocker/shiny:4.2.2
 
 RUN R -e "install.packages('renv')"
 
-WORKDIR /srv/shiny-server/app
+RUN rm -rf /srv/shiny-server/*
+WORKDIR /srv/shiny-server/
 
 COPY renv.lock renv.lock
 RUN mkdir -p renv
@@ -26,4 +27,4 @@ USER shiny
 RUN R -e "renv::restore()"
 
 # Copy all except folders and files starting with renv
-COPY [^renv]* /srv/shiny-server/app/
+COPY [^renv]* /srv/shiny-server/
